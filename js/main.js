@@ -7,8 +7,23 @@ class Product {
 };
 
 class UI {
-    addProduct() {
+    addProduct(product) {
+        const productList = document.getElementById('product-table-body');
+        const element = document.createElement("tr");
+        element.classList.add("text-center");
+        element.innerHTML = `
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.year}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" name="delete">X</button>
+            </td>
+        `;
+        productList.appendChild(element);
+    };
 
+    resetForm() {
+        document.getElementById('product-form').reset();
     };
 
     deleteProduct() {
@@ -28,5 +43,9 @@ document.getElementById('product-form').addEventListener("submit", (e) => {
     const price = document.getElementById('price').value.trim();
     const year = document.getElementById('year').value.trim();
 
-    console.log(name, price, year);
+    const product = new Product(name, price, year);
+    const ui = new UI();
+
+    ui.addProduct(product);
+    ui.resetForm();
 });
