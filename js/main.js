@@ -32,8 +32,17 @@ class UI {
         }
     };
 
-    showMessages() {
-
+    showMessages(message, classCSS) {
+        const div = document.createElement("div");
+        div.className = `alert alert-${classCSS} mt-4`;
+        div.appendChild(document.createTextNode(message));
+        //Show in DOM
+        const container = document.querySelector('.container');
+        const app = document.getElementById('app');
+        container.insertBefore(div, app);
+        setTimeout(()=>{
+            document.querySelector(".alert").remove();
+        }, 3000);
     };
 };
 
